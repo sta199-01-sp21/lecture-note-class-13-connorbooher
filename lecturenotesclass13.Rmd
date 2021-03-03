@@ -147,6 +147,8 @@ were to take another random sample of 50 students, how many would you expect
 to be left handed? Would you be surprised if only 3 of them were left handed? 
 Would you be surprised if 40 of them were left handed?
 
+I'd be suprised if 40--not 3--were left-handed.
+
 ## Quantifying the variability of a sample statistic
 
 We can quantify the variability of sample statistics using
@@ -189,7 +191,7 @@ Consider 20 1-bedroom apartments that were randomly selected on
 Craigslist Manhattan from apartments listed as "by owner".
 
 ```{r data_manhattan}
-manhattan <- read_csv("~/manhattan.csv")
+manhattan <- read_csv("manhattan.csv")
 ```
 
 Consider 3-10 day survival of mice randomized to various
@@ -250,10 +252,10 @@ Create a 95% bootstrap confidence interval for the population *mean* price of
 
 First, identify the following:
 
-- Population: 
-- Parameter of interest:
-- Sample:
-- Sample size:
+- Population: Manhattan 1-Bedroom Manhattan Apartment
+- Parameter of interest: Mean Price
+- Sample: 1 Bedroom Apartments
+- Sample size: 20
 
 To create our confidence interval, we'll follow the four-step bootstrap
 scheme outlined in the slides using functions from `infer`.
