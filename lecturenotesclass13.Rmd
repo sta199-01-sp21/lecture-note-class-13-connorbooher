@@ -381,7 +381,8 @@ ci_mice_died
 
 What does this mean?
 
-**Interpretation**: We can say with 95% confidence that the proportion of mice which died without treatment.
+**Interpretation**: We can say with 95% confidence that the proportion of mice 
+which died without treatment.
 
 ```{r visualize_ci_mice}
 visualise(boot_prop) +
@@ -393,21 +394,31 @@ visualise(boot_prop) +
 Consider the mice radiation results. Suppose we want to compute a 90% confidence interval for the proportion of mice that lived while on the treatment, regardless of the dose.
 
 ```{r practice_2_bootstrap}
-
+boot_prop <- mice %>% 
+  filter(treat == 1) %>% 
+  mutate(lived = if_else(died == 1, "no", "yes")) %>% 
+  specify(response = lived, success = "yes") %>% 
+  generate(reps = 10000, type = "bootstrap") %>% 
+  calculate(stat = "prop")
 ```
 
 ```{r practice_2_ci}
-
+ci_mice_lived <- get_ci(boot_prop, level = .90)
+ci_mice_lived
 ```
 
 Visualizing our Resuts:
 
 ```{r practice_2_visualize}
-
+visualise(boot_prop) +
+  shade_ci(ci_mice_lived)
 ```
 
 
 Give an interpretation of your result.
+
+We can say with 95% confidence that the actual proportion of mice which died is 
+between .552 and .651.
 
 
 # References
